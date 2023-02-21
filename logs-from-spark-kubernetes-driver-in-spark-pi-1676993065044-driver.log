@@ -1,0 +1,149 @@
+++ id -u
++ myuid=185
+++ id -g
++ mygid=0
++ set +e
+++ getent passwd 185
++ uidentry=
++ set -e
++ '[' -z '' ']'
++ '[' -w /etc/passwd ']'
++ echo '185:x:185:0:anonymous uid:/opt/spark:/bin/false'
++ SPARK_CLASSPATH=':/opt/spark/jars/*'
++ env
++ grep SPARK_JAVA_OPT_
++ sort -t_ -k4 -n
++ sed 's/[^=]*=\(.*\)/\1/g'
++ readarray -t SPARK_EXECUTOR_JAVA_OPTS
++ '[' -n '' ']'
++ '[' -z ']'
++ '[' -z ']'
++ '[' -n '' ']'
++ '[' -z ']'
++ '[' -z x ']'
++ SPARK_CLASSPATH='/opt/spark/conf::/opt/spark/jars/*'
++ case "$1" in
++ shift 1
++ CMD=("$SPARK_HOME/bin/spark-submit" --conf "spark.driver.bindAddress=$SPARK_DRIVER_BIND_ADDRESS" --deploy-mode client "$@")
++ exec /usr/bin/tini -s -- /opt/spark/bin/spark-submit --conf spark.driver.bindAddress=10.244.0.17 --deploy-mode client --properties-file /opt/spark/conf/spark.properties --class org.apache.spark.examples.SparkPi spark-internal
+WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by org.apache.spark.unsafe.Platform (file:/opt/spark/jars/spark-unsafe_2.12-3.1.3.jar) to constructor java.nio.DirectByteBuffer(long,int)
+WARNING: Please consider reporting this to the maintainers of org.apache.spark.unsafe.Platform
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+23/02/21 15:24:29 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+Using Spark's default log4j profile: org/apache/spark/log4j-defaults.properties
+23/02/21 15:24:29 INFO SparkContext: Running Spark version 3.1.3
+23/02/21 15:24:29 INFO ResourceUtils: ==============================================================
+23/02/21 15:24:29 INFO ResourceUtils: No custom resources configured for spark.driver.
+23/02/21 15:24:29 INFO ResourceUtils: ==============================================================
+23/02/21 15:24:29 INFO SparkContext: Submitted application: Spark Pi
+23/02/21 15:24:29 INFO ResourceProfile: Default ResourceProfile created, executor resources: Map(cores -> name: cores, amount: 1, script: , vendor: , memory -> name: memory, amount: 1024, script: , vendor: , offHeap -> name: offHeap, amount: 0, script: , vendor: ), task resources: Map(cpus -> name: cpus, amount: 1.0)
+23/02/21 15:24:29 INFO ResourceProfile: Limiting resource is cpus at 1 tasks per executor
+23/02/21 15:24:29 INFO ResourceProfileManager: Added ResourceProfile id: 0
+23/02/21 15:24:29 INFO SecurityManager: Changing view acls to: 185
+23/02/21 15:24:29 INFO SecurityManager: Changing modify acls to: 185
+23/02/21 15:24:29 INFO SecurityManager: Changing view acls groups to: 
+23/02/21 15:24:29 INFO SecurityManager: Changing modify acls groups to: 
+23/02/21 15:24:29 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users  with view permissions: Set(185); groups with view permissions: Set(); users  with modify permissions: Set(185); groups with modify permissions: Set()
+23/02/21 15:24:29 INFO Utils: Successfully started service 'sparkDriver' on port 7078.
+23/02/21 15:24:29 INFO SparkEnv: Registering MapOutputTracker
+23/02/21 15:24:29 INFO SparkEnv: Registering BlockManagerMaster
+23/02/21 15:24:29 INFO BlockManagerMasterEndpoint: Using org.apache.spark.storage.DefaultTopologyMapper for getting topology information
+23/02/21 15:24:29 INFO BlockManagerMasterEndpoint: BlockManagerMasterEndpoint up
+23/02/21 15:24:29 INFO SparkEnv: Registering BlockManagerMasterHeartbeat
+23/02/21 15:24:29 INFO DiskBlockManager: Created local directory at /var/data/spark-40a4d8fa-d0a0-4dff-83d7-37d9db9848cf/blockmgr-d025ce04-39a7-44a6-ad9c-65c9ba5b023c
+23/02/21 15:24:29 INFO MemoryStore: MemoryStore started with capacity 413.9 MiB
+23/02/21 15:24:29 INFO SparkEnv: Registering OutputCommitCoordinator
+23/02/21 15:24:30 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+23/02/21 15:24:30 INFO SparkUI: Bound SparkUI to 0.0.0.0, and started at http://spark-pi-1676993065044-driver-svc.default.svc:4040
+23/02/21 15:24:30 INFO SparkContext: Added JAR file:///opt/spark/examples/jars/spark-examples_2.12-3.1.3.jar at spark://spark-pi-1676993065044-driver-svc.default.svc:7078/jars/spark-examples_2.12-3.1.3.jar with timestamp 1676993069542
+23/02/21 15:24:30 INFO SparkKubernetesClientFactory: Auto-configuring K8S client using current context from users K8S config file
+23/02/21 15:24:31 ERROR SparkContext: Error initializing SparkContext.
+org.apache.spark.SparkException: External scheduler cannot be instantiated
+	at org.apache.spark.SparkContext$.org$apache$spark$SparkContext$$createTaskScheduler(SparkContext.scala:2961)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:557)
+	at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2672)
+	at org.apache.spark.sql.SparkSession$Builder.$anonfun$getOrCreate$2(SparkSession.scala:945)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:939)
+	at org.apache.spark.examples.SparkPi$.main(SparkPi.scala:30)
+	at org.apache.spark.examples.SparkPi.main(SparkPi.scala)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.spark.deploy.JavaMainApplication.start(SparkApplication.scala:52)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:951)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:180)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:203)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:90)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1039)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1048)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://kubernetes.default.svc/api/v1/namespaces/default/pods/spark-pi-1676993065044-driver. Message: Forbidden!Configured service account doesn't have access. Service account may have been revoked. pods "spark-pi-1676993065044-driver" is forbidden: User "system:serviceaccount:default:default" cannot get resource "pods" in API group "" in the namespace "default".
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.requestFailure(OperationSupport.java:589)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.assertResponseCode(OperationSupport.java:526)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.handleResponse(OperationSupport.java:492)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.handleResponse(OperationSupport.java:451)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.handleGet(OperationSupport.java:416)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.handleGet(OperationSupport.java:397)
+	at io.fabric8.kubernetes.client.dsl.base.BaseOperation.handleGet(BaseOperation.java:933)
+	at io.fabric8.kubernetes.client.dsl.base.BaseOperation.getMandatory(BaseOperation.java:220)
+	at io.fabric8.kubernetes.client.dsl.base.BaseOperation.get(BaseOperation.java:186)
+	at io.fabric8.kubernetes.client.dsl.base.BaseOperation.get(BaseOperation.java:84)
+	at org.apache.spark.scheduler.cluster.k8s.ExecutorPodsAllocator.$anonfun$driverPod$1(ExecutorPodsAllocator.scala:78)
+	at scala.Option.map(Option.scala:230)
+	at org.apache.spark.scheduler.cluster.k8s.ExecutorPodsAllocator.<init>(ExecutorPodsAllocator.scala:77)
+	at org.apache.spark.scheduler.cluster.k8s.KubernetesClusterManager.createSchedulerBackend(KubernetesClusterManager.scala:123)
+	at org.apache.spark.SparkContext$.org$apache$spark$SparkContext$$createTaskScheduler(SparkContext.scala:2955)
+	... 19 more
+23/02/21 15:24:31 INFO SparkUI: Stopped Spark web UI at http://spark-pi-1676993065044-driver-svc.default.svc:4040
+23/02/21 15:24:31 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+23/02/21 15:24:31 INFO MemoryStore: MemoryStore cleared
+23/02/21 15:24:31 INFO BlockManager: BlockManager stopped
+23/02/21 15:24:31 INFO BlockManagerMaster: BlockManagerMaster stopped
+23/02/21 15:24:31 WARN MetricsSystem: Stopping a MetricsSystem that is not running
+23/02/21 15:24:31 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+23/02/21 15:24:31 INFO SparkContext: Successfully stopped SparkContext
+Exception in thread "main" org.apache.spark.SparkException: External scheduler cannot be instantiated
+	at org.apache.spark.SparkContext$.org$apache$spark$SparkContext$$createTaskScheduler(SparkContext.scala:2961)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:557)
+	at org.apache.spark.SparkContext$.getOrCreate(SparkContext.scala:2672)
+	at org.apache.spark.sql.SparkSession$Builder.$anonfun$getOrCreate$2(SparkSession.scala:945)
+	at scala.Option.getOrElse(Option.scala:189)
+	at org.apache.spark.sql.SparkSession$Builder.getOrCreate(SparkSession.scala:939)
+	at org.apache.spark.examples.SparkPi$.main(SparkPi.scala:30)
+	at org.apache.spark.examples.SparkPi.main(SparkPi.scala)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at org.apache.spark.deploy.JavaMainApplication.start(SparkApplication.scala:52)
+	at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:951)
+	at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:180)
+	at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:203)
+	at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:90)
+	at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:1039)
+	at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:1048)
+	at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+Caused by: io.fabric8.kubernetes.client.KubernetesClientException: Failure executing: GET at: https://kubernetes.default.svc/api/v1/namespaces/default/pods/spark-pi-1676993065044-driver. Message: Forbidden!Configured service account doesn't have access. Service account may have been revoked. pods "spark-pi-1676993065044-driver" is forbidden: User "system:serviceaccount:default:default" cannot get resource "pods" in API group "" in the namespace "default".
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.requestFailure(OperationSupport.java:589)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.assertResponseCode(OperationSupport.java:526)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.handleResponse(OperationSupport.java:492)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.handleResponse(OperationSupport.java:451)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.handleGet(OperationSupport.java:416)
+	at io.fabric8.kubernetes.client.dsl.base.OperationSupport.handleGet(OperationSupport.java:397)
+	at io.fabric8.kubernetes.client.dsl.base.BaseOperation.handleGet(BaseOperation.java:933)
+	at io.fabric8.kubernetes.client.dsl.base.BaseOperation.getMandatory(BaseOperation.java:220)
+	at io.fabric8.kubernetes.client.dsl.base.BaseOperation.get(BaseOperation.java:186)
+	at io.fabric8.kubernetes.client.dsl.base.BaseOperation.get(BaseOperation.java:84)
+	at org.apache.spark.scheduler.cluster.k8s.ExecutorPodsAllocator.$anonfun$driverPod$1(ExecutorPodsAllocator.scala:78)
+	at scala.Option.map(Option.scala:230)
+	at org.apache.spark.scheduler.cluster.k8s.ExecutorPodsAllocator.<init>(ExecutorPodsAllocator.scala:77)
+	at org.apache.spark.scheduler.cluster.k8s.KubernetesClusterManager.createSchedulerBackend(KubernetesClusterManager.scala:123)
+	at org.apache.spark.SparkContext$.org$apache$spark$SparkContext$$createTaskScheduler(SparkContext.scala:2955)
+	... 19 more
+23/02/21 15:26:01 INFO ShutdownHookManager: Shutdown hook called
+23/02/21 15:26:01 INFO ShutdownHookManager: Deleting directory /var/data/spark-40a4d8fa-d0a0-4dff-83d7-37d9db9848cf/spark-bd5f0087-035f-41e9-95fb-a50aa529812f
+23/02/21 15:26:01 INFO ShutdownHookManager: Deleting directory /tmp/spark-337f9d1b-c0dd-418f-b4a4-ca3dbcb3b1ae
