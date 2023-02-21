@@ -9,6 +9,7 @@ minikube start --memory 4096 --cpus 3
 kubectl config view
 
 `./bin/docker-image-tool.sh -r localhost:5000/example/repo -t spark-app build`
+
 `./bin/docker-image-tool.sh -r localhost:5000/example/repo -t spark-app push`
 
 
