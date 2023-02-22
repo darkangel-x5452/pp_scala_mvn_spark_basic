@@ -43,3 +43,15 @@ kubectl config view
 `kubectl get configmap spark-pi-1676991729721-driver-conf-map`
 `kubectl get pods`
 `kubectl logs spark-pi-1676991729721-driver`
+
+
+https://stackoverflow.com/questions/62543646/why-external-scheduler-cannot-be-instantiated-running-spark-on-minikube-kubernet
+- kubectl create clusterrolebinding default --clusterrole=edit --serviceaccount=default:default --namespace=default
+
+spark-submit --master k8s://https://api-server.io:api-port --deploy-mode cluster --name spark-pi --class org.apache.spark.examples.SparkPi --conf spark.executor.instances=1 --conf spark.kubernetes.container.image=name.rego.io/example/repo/spark:latest local://///opt/spark/examples/jars/spark-examples_2.11-2.4.7.jar
+
+
+kubectl get pods
+kubectl logs spark-pi-44234234-driver
+kubectl logs spark-pi-86578876-exec-1
+
