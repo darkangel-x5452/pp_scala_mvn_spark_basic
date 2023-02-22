@@ -1,5 +1,11 @@
 # pp_scala_mvn_spark_basic
 
+# Python
+` 
+RUN apt-get update && \
+#     apt install -y python python-pip && \
+    apt install -y python3 python3-pip && \
+`
 kubectl get node minikube -o jsonpath='{.status.capacity}'
 
 minikube stop
