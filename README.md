@@ -16,9 +16,12 @@ kubectl config view
 
 - ./bin/docker-image-tool.sh -r example/repo -t spark-app build
 - ./bin/docker-image-tool.sh -r example/repo -t spark-app push
-- docker image tag example/repo:spark-app myname/example/repo:latest
+- ./bin/docker-image-tool.sh -r name.rego.io/example/repo -t latest push
+- docker image tag example/repo/spark:spark-app name.rego.io/example/repo/spark:latest
 
-`spark-submit --master k8s://https://127.0.0.1:53867 --deploy-mode cluster --name spark-pi --class org.apache.spark.examples.SparkPi --conf spark.executor.instances=1 --conf spark.kubernetes.container.image=apache/spark:v3.1.3 local://///opt/spark/examples/jars/spark-examples_2.12-3.1.3.jar`
+- spark-submit --master k8s://https://127.0.0.1:53867 --deploy-mode cluster --name spark-pi --class org.apache.spark.examples.SparkPi --conf spark.executor.instances=1 --conf spark.kubernetes.container.image=apache/spark:v3.1.3 local://///opt/spark/examples/jars/spark-examples_2.12-3.1.3.jar
+
+    - spark-submit --master k8s://https://api-server.io:api-port --deploy-mode cluster --name spark-pi --class org.apache.spark.examples.SparkPi --conf spark.executor.instances=1 --conf spark.kubernetes.container.image=name.rego.io/example/repo/spark:latest local://///opt/spark/examples/jars/spark-examples_2.11-2.4.7.jar
 
 - localhost:5000/example/repo
 - example/repo/spark:spark-app
